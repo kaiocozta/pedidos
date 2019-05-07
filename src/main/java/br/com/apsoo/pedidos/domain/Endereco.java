@@ -1,5 +1,7 @@
 package br.com.apsoo.pedidos.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +24,7 @@ public class Endereco implements Serializable {
     @Id
     @Column(name = "EN_ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_endereco")
-    private Long id;
+    private Integer id;
 
     @Column(name = "EN_LOGRADOURO")
     private String logradouro;
@@ -43,6 +45,7 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "CI_ID")
     private Cidade cidade;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "CL_ID")
     private Cliente cliente;
@@ -50,7 +53,7 @@ public class Endereco implements Serializable {
     public Endereco() {
     }
 
-    public Endereco(Long id, String logradouro, String numero, String complemento, String bairro, String cep, Cidade cidade, Cliente cliente) {
+    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cidade cidade, Cliente cliente) {
         this.id = id;
         this.logradouro = logradouro;
         this.numero = numero;
@@ -61,11 +64,11 @@ public class Endereco implements Serializable {
         this.cliente = cliente;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

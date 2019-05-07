@@ -2,7 +2,16 @@ package br.com.apsoo.pedidos.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +23,6 @@ import java.util.Objects;
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
 
     @Id
     @Column(name = "PR_ID")
@@ -28,22 +36,21 @@ public class Produto implements Serializable {
     private Double preco;
 
     @JsonIgnore
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(name = "TB_PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "PR_ID"),
             inverseJoinColumns = @JoinColumn(name = "CA_ID")
-
     )
     private List<Categoria> categorias = new ArrayList<>();
 
-    public Produto() {
+    public Produto(){
 
     }
 
-    public Produto(Integer id, String nome, Double preco) {
-        this.setId(id);
-        this.setNome(nome);
-        this.setPreco(preco);
+    public Produto(Integer id, String nome, double preco) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
     }
 
     public Integer getId() {
@@ -83,7 +90,7 @@ public class Produto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
-        return Objects.equals(id, produto.id);
+        return id.equals(produto.id);
     }
 
     @Override
