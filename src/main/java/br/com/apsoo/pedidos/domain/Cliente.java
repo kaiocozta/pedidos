@@ -1,6 +1,7 @@
 package br.com.apsoo.pedidos.domain;
 
 import br.com.apsoo.pedidos.domain.enumerations.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.CollectionTable;
@@ -52,6 +53,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "TB_TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 

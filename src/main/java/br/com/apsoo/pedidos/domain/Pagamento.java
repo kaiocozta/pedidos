@@ -1,6 +1,7 @@
 package br.com.apsoo.pedidos.domain;
 
 import br.com.apsoo.pedidos.domain.enumerations.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +30,7 @@ public abstract class Pagamento implements Serializable {
     @Column(name = "PA_ESTADO")
     private EstadoPagamento estado;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "PE_ID")
     @MapsId
