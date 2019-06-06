@@ -49,7 +49,7 @@ public class Produto implements Serializable {
     @OneToMany(mappedBy = "id.produto")
     private Set<ItemPedido> itens = new HashSet<>();
 
-    public Produto(){
+    public Produto() {
 
     }
 
